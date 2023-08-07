@@ -138,6 +138,10 @@ pushd $BASE_WORKSPACE
   else
     7za x -aoa "$BASE_ZIP_IMG"
   fi
+  if [ "$GH_REF_TYPE" != "" ] ; then
+    # running in a GitHub action - let's save some space
+    rm "$BASE_ZIP_IMG"
+  fi
   
   BASE_IMG_PATH=`ls | grep '.img$\|.raw$' | head -n 1`
   if [ ! -f "$BASE_IMG_PATH" ]; then
