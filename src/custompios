@@ -164,6 +164,12 @@ pushd $BASE_WORKSPACE
     mount --bind "$BASE_APT_CACHE" $BASE_MOUNT_PATH/var/cache/apt
   fi
 
+  # make sure we have working name resolution
+  rm -f "${BASE_MOUNT_PATH}/etc/resolv.conf"
+  cat /etc/resolv.conf > "${BASE_MOUNT_PATH}/etc/resolv.conf"
+
+  fi
+
   #Edit pi filesystem
   pushd $BASE_MOUNT_PATH
 
