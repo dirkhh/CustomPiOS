@@ -12,6 +12,12 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
+# if we are running on an image that doesn't have wifi support, stop
+if [ ! -f /etc/wpa_supplicant/wpa_supplicant.conf ] ; then
+    echo "no wifi configured, moving on"
+    exit 0
+fi
+
 if [ "${NETWORK_WPA_SUPPLICANT}" == "yes" ]; then
     unpack /filesystem/wpa-supplicant/boot /"${BASE_BOOT_MOUNT_PATH}"
     DIST_NETWORK_FILE=/"${BASE_BOOT_MOUNT_PATH}"/${DIST_NAME,,}-wpa-supplicant.txt
