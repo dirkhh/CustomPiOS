@@ -73,6 +73,13 @@ function get_os_version {
   grep -c "buster" /etc/os-release
 }
 
+if [ -d /opt/keys ] ; then
+    cd /opt/keys
+    for key in *.deb
+    do
+        dpkg -i $key
+    done
+fi
 if [ "${BASE_ADD_USER}" == "yes" ]; then
     if [ "${BASE_DISTRO}" == "raspbian" ] || [ "${BASE_DISTRO}" == "raspios64" ] || [ "${BASE_DISTRO}" == "raspios" ]; then
         # Setup first user, reference:

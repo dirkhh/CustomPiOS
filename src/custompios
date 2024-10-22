@@ -168,6 +168,11 @@ pushd $BASE_WORKSPACE
   rm -f "${BASE_MOUNT_PATH}/etc/resolv.conf"
   cat /etc/resolv.conf > "${BASE_MOUNT_PATH}/etc/resolv.conf"
 
+  # install missing keys if necessary
+  if [ -d "${CUSTOM_PI_OS_PATH}"/keys ]
+  then
+    mkdir -p $BASE_MOUNT_PATH/opt/keys
+    cp "${CUSTOM_PI_OS_PATH}"/keys/*.deb $BASE_MOUNT_PATH/opt/keys/
   fi
 
   #Edit pi filesystem
